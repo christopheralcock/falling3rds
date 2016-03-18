@@ -12,9 +12,9 @@ var falling3rdsApp = {
     this.colourEnumerator += 1;
     
     var backgroundColour = {
-      h: (falling3rdsApp.colourEnumerator/5) % 360,
-      s: 70 * Math.sin(falling3rdsApp.colourEnumerator/500),
-      l: 100 - (70 * Math.sin(falling3rdsApp.colourEnumerator/400)),
+      h: (this.colourEnumerator/5) % 360,
+      s: 70 * Math.sin(this.colourEnumerator/500),
+      l: 100 - (70 * Math.sin(this.colourEnumerator/400)),
       hsl: "hsl(" + this.h + ", " + this.s + "%, " + this.l +"%)"
       console.log("internal hsl: "+this.hsl)
     };
