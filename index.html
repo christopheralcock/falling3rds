@@ -9,9 +9,7 @@ var falling3rdsApp = {
   },
   
   cycleBackgroundColour: function(){
-    if(this.colourEnumerator < 100){
-      this.colourEnumerator += 1;
-    };
+    this.colourEnumerator += 1;
     document.getElementById("fullPage").style.background = "hsl(210, " + (100 * Math.sin(this.colourEnumerator/100)) + "%, 60%)";
   },
   arpeggioNotes: [0,0,4,4,7],
