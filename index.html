@@ -2,14 +2,14 @@
 var audioContext = new AudioContext();
 var falling3rdsApp = {
   currentNumberOfParts: 0,
-  currentColour = "black",
+  currentColour = "blue",
   
   resetParts: function(){
     this.currentNumberOfParts = 0;
   },
   
   cycleBackgroundColour: function(){
-    document.getElementById("fullPage").style.background-color = this.currentColour;
+    document.getElementById("fullPage").style.color = this.currentColour;
   },
   
   arpeggioNotes: [0,0,4,4,7],
