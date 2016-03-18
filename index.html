@@ -10,7 +10,6 @@ var falling3rdsApp = {
 
   cycleBackgroundColour: function(){
     this.colourEnumerator += 1;
-
     var backgroundColour = {
       hsl: "hsl(" + ((this.colourEnumerator/5) % 360)
         + ", " + (70 * Math.sin(this.colourEnumerator/500)) + "%, "
