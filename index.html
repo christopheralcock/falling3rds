@@ -2,16 +2,17 @@
 var audioContext = new AudioContext();
 var falling3rdsApp = {
   currentNumberOfParts: 0,
-  currentColour: "#FF0000",
+  colourEnumerator: 0,
   
   resetParts: function(){
     this.currentNumberOfParts = 0;
   },
   
   cycleBackgroundColour: function(){
-    document.getElementById("fullPage").style.background = this.currentColour;
+    this.colourEnumerator += 1;
+    document.getElementById("fullPage").style.background = this.backgroundColours[colourEnumerator % 4];
   },
-  
+  backgroundColours: ["#5A5353","#E6CCBE","#A07178","#776274","#C8CC92"],
   arpeggioNotes: [0,0,4,4,7],
   octaveDistribution: [-24,-24,-12,-12,-12,0,0,0,0,0,12,12],
   repeatPeriods: [3,4,5,5,5.5,6,7,7.5,7.5,8,9,10,11,12,13,14,15,16],
