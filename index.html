@@ -11,12 +11,19 @@ var falling3rdsApp = {
   cycleBackgroundColour: function(){
     this.colourEnumerator += 1;
     
-    var backgroundColour = "hsl(" + ((this.colourEnumerator/5) % 360) 
-      + ", " + (70 * Math.sin(this.colourEnumerator/500)) + "%, " 
-      + (100 - (70 * Math.sin(this.colourEnumerator/400))) + "%)";
+    var backgroundColour = {
+      h: (falling3rdsApp.colourEnumerator/5) % 360,
+      s: 70 * Math.sin(falling3rdsApp.colourEnumerator/500),
+      l: 100 - (70 * Math.sin(falling3rdsApp.colourEnumerator/400)),
+      hsl: "hsl(" + this.h + ", " + this.s + "%, " + this.l +"%)
+    }
+    
+    //"hsl(" + ((this.colourEnumerator/5) % 360) 
+    //  + ", " + (70 * Math.sin(this.colourEnumerator/500)) + "%, " 
+    //  + (100 - (70 * Math.sin(this.colourEnumerator/400))) + "%)";
       
-    document.getElementById("fullPage").style.background = backgroundColour;
-    console.log("background colour: " + backgroundColour);
+    document.getElementById("fullPage").style.background = backgroundColour.hsl;
+    console.log("background colour: " + backgroundColour.hsl);
   },
   arpeggioNotes: [0,0,4,4,7],
   octaveDistribution: [-24,-24,-12,-12,-12,0,0,0,0,0,12,12],
