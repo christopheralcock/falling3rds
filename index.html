@@ -10,7 +10,7 @@ var falling3rdsApp = {
   
   cycleBackgroundColour: function(){
     this.colourEnumerator += 1;
-    document.getElementById("fullPage").style.background = this.backgroundColours[colourEnumerator % 4];
+    document.getElementById("fullPage").style.background = this.backgroundColours[this.colourEnumerator % 4];
   },
   backgroundColours: ["#5A5353","#E6CCBE","#A07178","#776274","#C8CC92"],
   arpeggioNotes: [0,0,4,4,7],
