@@ -11,22 +11,11 @@ var falling3rdsApp = {
   cycleBackgroundColour: function(){
     this.colourEnumerator += 1;
     
-    //var backgroundColour = {
-    //	hsl: "hsl(" + ((this.colourEnumerator/5) % 360) 
-    //  + ", " + (70 * Math.sin(this.colourEnumerator/500)) + "%, " 
-    //  + (100 - (70 * Math.sin(this.colourEnumerator/400))) + "%)"
-    //};
-    
     var backgroundColour = {
-
-h: ((this.colourEnumerator/5) % 360),
-s: (70 * Math.sin(this.colourEnumerator/500)),
-l: (100 - (70 * Math.sin(this.colourEnumerator/400))),
-hsl: "hsl(" + backgroundColour.h + ", " + backgroundColour.s + "%, " + backgroundColour.l + "%)"
-
-};
-    
-    
+      hsl: "hsl(" + ((this.colourEnumerator/5) % 360) 
+        + ", " + (70 * Math.sin(this.colourEnumerator/500)) + "%, " 
+        + (100 - (70 * Math.sin(this.colourEnumerator/400))) + "%)"
+    };
     document.getElementById("fullPage").style.background = backgroundColour.hsl;
     console.log("background colour: " + backgroundColour.hsl);
   },
