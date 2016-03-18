@@ -2,9 +2,14 @@
 var audioContext = new AudioContext();
 var falling3rdsApp = {
   currentNumberOfParts: 0,
+  currentColour = "black",
   
   resetParts: function(){
     this.currentNumberOfParts = 0;
+  },
+  
+  cycleBackgroundColour: function(){
+    document.getElementById("fullPage").style.background-color = this.currentColour;
   },
   
   arpeggioNotes: [0,0,4,4,7],
@@ -91,7 +96,7 @@ var falling3rdsApp = {
     };
     
     function play(delay, pitch, duration, wave) {
-    
+      falling3rdsApp.cycleBackgroundColour();
       if (falling3rdsApp.currentNumberOfParts == 0){
         endMusic();
       };
@@ -150,6 +155,7 @@ window.onload = function(){
 };
 </script>
 
+<div id="fullPage">
 FALLING THIRDS
 <br>
 (HAVE PATIENCE)
@@ -166,3 +172,4 @@ FALLING THIRDS
 volume: <span id="volume">3</span>
 <br>
 <button onclick="falling3rdsApp.volumeDown()">decrease volume</button>
+</div>
