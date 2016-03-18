@@ -16,7 +16,8 @@ var falling3rdsApp = {
       s: 70 * Math.sin(falling3rdsApp.colourEnumerator/500),
       l: 100 - (70 * Math.sin(falling3rdsApp.colourEnumerator/400)),
       hsl: "hsl(" + this.h + ", " + this.s + "%, " + this.l +"%)"
-    }
+      console.log("internal hsl: "+this.hsl)
+    };
     
     //"hsl(" + ((this.colourEnumerator/5) % 360) 
     //  + ", " + (70 * Math.sin(this.colourEnumerator/500)) + "%, " 
