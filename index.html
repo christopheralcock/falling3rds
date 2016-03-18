@@ -15,8 +15,8 @@ var falling3rdsApp = {
       + ", " + (70 * Math.sin(this.colourEnumerator/500)) + "%, " 
       + (100 - (70 * Math.sin(this.colourEnumerator/400))) + "%)";
       
-    document.getElementById("fullPage").style.background = this.backgroundColour.hsl;
-    console.log("background colour: " + this.backgroundColour.hsl);
+    document.getElementById("fullPage").style.background = this.backgroundColour;
+    console.log("background colour: " + this.backgroundColour);
   },
   arpeggioNotes: [0,0,4,4,7],
   octaveDistribution: [-24,-24,-12,-12,-12,0,0,0,0,0,12,12],
