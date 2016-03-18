@@ -10,9 +10,8 @@ var falling3rdsApp = {
   
   cycleBackgroundColour: function(){
     this.colourEnumerator += 1;
-    document.getElementById("fullPage").style.background = this.backgroundColours[this.colourEnumerator % 2];
+    document.getElementById("fullPage").style.background = "hsl(300, " + this.colourEnumerator + "%, 20%)";
   },
-  backgroundColours: ["hsl(300, 100%, 20%)","hsl(300, 50%, 20%)"],
   arpeggioNotes: [0,0,4,4,7],
   octaveDistribution: [-24,-24,-12,-12,-12,0,0,0,0,0,12,12],
   repeatPeriods: [3,4,5,5,5.5,6,7,7.5,7.5,8,9,10,11,12,13,14,15,16],
