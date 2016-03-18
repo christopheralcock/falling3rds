@@ -12,7 +12,7 @@ var falling3rdsApp = {
     this.colourEnumerator += 1;
     
     var backgroundColour = "hsl(" + (this.colourEnumerator % 360) 
-      + ", " + (100 * Math.sin(this.colourEnumerator/100)) + "%, " 
+      + ", " + (70 * Math.sin(this.colourEnumerator/100)) + "%, " 
       + (100 - (70 * Math.sin(this.colourEnumerator/100))) + "%)";
       
     document.getElementById("fullPage").style.background = backgroundColour;
