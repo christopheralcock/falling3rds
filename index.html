@@ -11,9 +11,9 @@ var falling3rdsApp = {
   cycleBackgroundColour: function(){
     this.colourEnumerator += 1;
     
-    var backgroundColour = "hsl(" + (this.colourEnumerator % 360) 
-      + ", " + (70 * Math.sin(this.colourEnumerator/100)) + "%, " 
-      + (100 - (70 * Math.sin(this.colourEnumerator/100))) + "%)";
+    var backgroundColour = "hsl(" + ((this.colourEnumerator/5) % 360) 
+      + ", " + (70 * Math.sin(this.colourEnumerator/500)) + "%, " 
+      + (100 - (70 * Math.sin(this.colourEnumerator/400))) + "%)";
       
     document.getElementById("fullPage").style.background = backgroundColour;
     console.log("background colour: " + backgroundColour);
