@@ -3,17 +3,17 @@ var audioContext = new AudioContext();
 var falling3rdsApp = {
   currentNumberOfParts: 0,
   colourEnumerator: 0,
-  
+
   resetParts: function(){
     this.currentNumberOfParts = 0;
   },
-  
+
   cycleBackgroundColour: function(){
     this.colourEnumerator += 1;
-    
+
     var backgroundColour = {
-      hsl: "hsl(" + ((this.colourEnumerator/5) % 360) 
-        + ", " + (70 * Math.sin(this.colourEnumerator/500)) + "%, " 
+      hsl: "hsl(" + ((this.colourEnumerator/5) % 360)
+        + ", " + (70 * Math.sin(this.colourEnumerator/500)) + "%, "
         + (100 - (70 * Math.sin(this.colourEnumerator/400))) + "%)"
     };
     document.getElementById("fullPage").style.background = backgroundColour.hsl;
@@ -26,25 +26,25 @@ var falling3rdsApp = {
   availableWaves: ["sine"],
   secondsPerChord: 20,
   displayVolume: 3,
-  
+
   volumeUp: function(){
     if(this.displayVolume < 11){
       this.displayVolume += 1;
     };
     document.getElementById("volume").innerHTML = this.displayVolume;
   },
-  
+
   volumeDown: function(){
     if(this.displayVolume > 0){
       this.displayVolume -= 1;
     };
     document.getElementById("volume").innerHTML = this.displayVolume;
   },
-  
+
   volumeConversion: function(){
     return (0.009 * this.displayVolume * this.displayVolume)-(0.012 * this.displayVolume);
   },
-  
+
   newMusicalPart: function(){
     falling3rdsApp.currentNumberOfParts += 1;
     var id = falling3rdsApp.currentNumberOfParts;
@@ -55,26 +55,26 @@ var falling3rdsApp = {
 	  var melodyLength = sample(this.repeatPeriods);
 	  melody();
     var looper = setInterval(melody,(1000 * melodyLength));
-    
+
     function endMusic(){
       clearInterval(looper);
     };
-    
+
     function chooseNote(){
       return (sample(falling3rdsApp.arpeggioNotes)
         + sample(falling3rdsApp.octaveDistribution));
     };
-    
+
     function sample(arr){
       return arr[~~(Math.random() * arr.length)];
     };
-    
+
     function melody(){
       play(0, noteSet[0], 0.5, wave);
       play((+noteLength), noteSet[1], 0.5, wave);
       play((2 * +noteLength), noteSet[2], 0.5, wave);
     };
-    
+
     function timeInSeconds(time){
       var secs = time.getSeconds();
       var mins = time.getMinutes();
@@ -82,42 +82,42 @@ var falling3rdsApp = {
       var days = time.getUTCDate();
       return secs + (mins * 60) + (hours * 60 * 60) + (days * 60 * 60 * 24);
     };
-    
+
     function thirdsCycler(number){
       var step = number % 24;
       var majorOrMinor = "major";
       var cycleAdjustment = 0;
-      
+
       if (step % 2 == 1) {
         cycleAdjustment = 0.5;
         majorOrMinor = "minor";
       };
-      
+
       var transpose = (step * -3.5) + cycleAdjustment;
-      
+
       while (transpose < -3) {
         transpose += 12;
       };
-      
+
       return [transpose, majorOrMinor];
     };
-    
+
     function play(delay, pitch, duration, wave) {
       falling3rdsApp.cycleBackgroundColour();
       if (falling3rdsApp.currentNumberOfParts == 0){
         endMusic();
       };
-    
+
       var progressiveTime = new Date();
       var secondsIntoMonth = timeInSeconds(progressiveTime);
       var chordNumber = parseInt(secondsIntoMonth / falling3rdsApp.secondsPerChord);
       var transpose = thirdsCycler(chordNumber)[0];
       var currentChordType = thirdsCycler(chordNumber)[1];
-    
+
       if ([-20,-8,4,16,28].includes(pitch) && currentChordType == "minor"){
         pitch -= 1
       };
-    
+
       var startTime = audioContext.currentTime + delay;
       var endTime = startTime + duration;
       var delayLength = Math.random();
@@ -130,7 +130,7 @@ var falling3rdsApp = {
       var delayOutput = audioContext.createGain();
       var panner = audioContext.createStereoPanner();
       var volume = falling3rdsApp.volumeConversion(falling3rdsApp.displayVolume);
-    
+
       panner.connect(falling3rdsApp.speakers);
       delayOutput.connect(panner);
       delayInput.connect(delayOutput);
@@ -140,7 +140,7 @@ var falling3rdsApp = {
       delayInput.connect(delayTimer);
       envelope.connect(delayTimer);
       oscillator.connect(envelope);
-  
+
       envelope.gain.value = 0;
       envelope.gain.setTargetAtTime(volume, startTime, 0.1);
       envelope.gain.setTargetAtTime(0, endTime, 0.2);
@@ -148,7 +148,7 @@ var falling3rdsApp = {
       oscillator.detune.value = (pitch + transpose) * 100;
       oscillator.start(startTime);
       oscillator.stop(endTime + 2);
-  
+
       delayTimer.delayTime.value = delayLength;
       delayFeedback.gain.value = 0.8;
       panner.pan.value = panningAmount;
@@ -157,10 +157,15 @@ var falling3rdsApp = {
     };
   }
 };
+
 window.onload = function(){
   document.getElementById("webAudioTest").innerHTML = "";
 };
+
 </script>
+
+<head>
+</head>
 
 <body id="fullPage" style="text-align: center">
   <br>
@@ -176,8 +181,8 @@ window.onload = function(){
   <br>
   <br>
   <span id="webAudioTest">
-    Sadly you're using a browser that doesn't support Web Audio, so this site won't do anything for you.  
-    Try using Firefox or Chrome, or something other than an iPhone. Sorry.  
+    Sadly you're using a browser that doesn't support Web Audio, so this site won't do anything for you.
+    Try using Firefox or Chrome, or something other than an iPhone. Sorry.
     If you are using Firefox or Chrome and aren't on an iPhone and it's still not working, you might have JavaScript turned off, or have an extension that's clashing with this?
   </span>
   <br>
@@ -197,7 +202,7 @@ window.onload = function(){
   </a>
   <br>
   <br>
-  volume: 
+  volume:
   <span id="volume">
     3
   </span>
