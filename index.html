@@ -10,9 +10,9 @@ var falling3rdsApp = {
   
   cycleBackgroundColour: function(){
     this.colourEnumerator += 1;
-    document.getElementById("fullPage").style.background = this.backgroundColours[this.colourEnumerator % 34];
+    document.getElementById("fullPage").style.background = this.backgroundColours[this.colourEnumerator % 2];
   },
-  backgroundColours: ["#ffffff","#ffe6ff","#ffccff","#ffb3ff","#ff99ff","#ff80ff","#ff66ff","#ff4dff","#ff33ff","#ff1aff","#ff00ff","#e600e6","#cc00cc","#b300b3","#990099","#800080","#660066","#4d004d","#660066","#800080","#990099","#b300b3","#cc00cc","#e600e6","#ff00ff","#ff1aff","#ff33ff","#ff4dff","#ff66ff","#ff80ff","#ff99ff","#ffb3ff","#ffccff","#ffe6ff"],
+  backgroundColours: ["hsl(300, 100%, 20%)","hsl(300, 50%, 20%)"],
   arpeggioNotes: [0,0,4,4,7],
   octaveDistribution: [-24,-24,-12,-12,-12,0,0,0,0,0,12,12],
   repeatPeriods: [3,4,5,5,5.5,6,7,7.5,7.5,8,9,10,11,12,13,14,15,16],
