@@ -19,9 +19,9 @@ var falling3rdsApp = {
     
     var backgroundColour = {
 
-h: (this.colourEnumerator/5) % 360,
-s: 70 * Math.sin(this.colourEnumerator/500),
-l: 100 - (70 * Math.sin(this.colourEnumerator/400)),
+h: ((this.colourEnumerator/5) % 360),
+s: (70 * Math.sin(this.colourEnumerator/500)),
+l: (100 - (70 * Math.sin(this.colourEnumerator/400))),
 hsl: "hsl(" + this.h + ", " + this.s + "%, " + this.l + "%)"
 
 };
