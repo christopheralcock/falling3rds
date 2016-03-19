@@ -10,27 +10,47 @@ body {
   line-height: 1.5;
   text-align: center;
   color: #1C1C1C;
+  font-style: italic;
 }
 
 a {
   color: #1C1C1C;
   text-decoration: none;
 }
+
 a:hover {
     text-decoration: underline;
 }
+
 
 #triangle-contents {
   position: relative;
   top: -700px;
 }
 
-
 #triangle-down {
+  /*margin:auto;*/
 	width: 0;
 	height: 0;
 	border-left: 200px solid transparent;
 	border-right: 200px solid transparent;
 	border-top: 700px solid;
   color: red;
+}
+
+#triangle-right {
+  position: relative;
+  /*top: -350px;*/
+  margin: auto;
+	width: 0;
+	height: 0;
+	border-top: 60px solid transparent;
+	border-left: 100px solid green;
+	border-bottom: 60px solid transparent;
+}
+
+#start {
+  position: relative;
+  left: -95px;
+  top: -46px;
 }

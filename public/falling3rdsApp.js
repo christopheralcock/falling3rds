@@ -169,7 +169,7 @@ window.onload = function(){
   document.getElementById("webAudioTest").innerHTML = "";
 };
 
-document.getElementById("start").onclick = function(){falling3rdsApp.newMusicalPart()};
+document.getElementById("triangle-right").onclick = function(){falling3rdsApp.newMusicalPart()};
 document.getElementById("reset").onclick = function(){falling3rdsApp.resetParts()};
 document.getElementById("volumeUp").onclick = function(){falling3rdsApp.volumeUp()};
 document.getElementById("volumeDown").onclick = function(){falling3rdsApp.volumeDown()};
