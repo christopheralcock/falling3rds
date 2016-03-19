@@ -148,7 +148,7 @@ var falling3rdsApp = {
       var currentChordType = thirdsCycler(chordNumber)[1];
 
       if ([-20,-8,4,16,28].includes(pitch) && currentChordType == "minor"){
-        pitch -= 1
+        pitch -= 1;
       };
 
       var startTime = audioContext.currentTime + delay;
@@ -196,20 +196,31 @@ window.onload = function(){
 };
 
 document.getElementById("play-button").onclick = function(){
-  if(falling3rdsApp.currentNumberOfParts < 5){falling3rdsApp.newMusicalPart()};
-  if(falling3rdsApp.currentNumberOfParts < 5){document.getElementById("start").innerHTML = "more"};
-  if(falling3rdsApp.currentNumberOfParts == 5){document.getElementById("start").innerHTML = "&nbsp;"};
-
+  if (falling3rdsApp.currentNumberOfParts < 5) {
+    falling3rdsApp.newMusicalPart()
+  };
+  if (falling3rdsApp.currentNumberOfParts < 5) {
+    document.getElementById("play-button-wording").innerHTML = "more";
+  } else {
+    document.getElementById("play-button-wording").innerHTML = "enjoy";
+    document.getElementById("play-button").style = "position: relative; margin: auto; width: 0; height: 0; border-top: 60px solid transparent; border-left: 100px solid transparent; border-bottom: 60px solid transparent;";
+  };
   document.getElementById("reset").innerHTML = "stop";
   falling3rdsApp.updateStars();
 };
 
 document.getElementById("reset").onclick = function(){
   falling3rdsApp.resetParts();
-  document.getElementById("start").innerHTML = "play";
+  document.getElementById("play-button-wording").innerHTML = "play";
   document.getElementById("stars").innerHTML = "&nbsp;";
   document.getElementById("reset").innerHTML = "&nbsp;";
+  document.getElementById("play-button").style = "position: relative; margin: auto; width: 0; height: 0; border-top: 60px solid transparent; border-left: 100px solid hsl(331, 48%, 16%); border-bottom: 60px solid transparent;";
 };
 
-document.getElementById("volume-up-triangle").onclick = function(){falling3rdsApp.volumeUp()};
-document.getElementById("volume-down-triangle").onclick = function(){falling3rdsApp.volumeDown()};
+document.getElementById("volume-up-triangle").onclick = function(){
+  falling3rdsApp.volumeUp();
+};
+
+document.getElementById("volume-down-triangle").onclick = function(){
+  falling3rdsApp.volumeDown();
+};

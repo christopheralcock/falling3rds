@@ -1,5 +1,10 @@
 * {
+  /*border: solid 1px;*/
   box-sizing: border-box;
+}
+
+html {
+  height:800px;
 }
 
 body {
@@ -9,18 +14,23 @@ body {
   font-size: 16px;
   line-height: 1.5;
   text-align: center;
-  color: #1C1C1C;
+  color: hsl(331, 48%, 16%);
   font-style: italic;
   margin-bottom: -100px;
+  height:800px;
 }
 
 a {
-  color: #1C1C1C;
   text-decoration: none;
+  color: hsl(331, 48%, 16%);
 }
 
 a:hover {
     text-decoration: underline;
+}
+
+h2 {
+  margin-top: 10px;
 }
 
 #triangle-contents {
@@ -34,18 +44,25 @@ a:hover {
 	border-left: 200px solid transparent;
 	border-right: 200px solid transparent;
 	border-top: 700px solid;
-  color: red;
+  color: #D1345B;
+  /*hsl(345, 75%, 82%);*/
 }
 
 #play-button {
   position: relative;
-  /*top: -350px;*/
   margin: auto;
 	width: 0;
 	height: 0;
 	border-top: 60px solid transparent;
-	border-left: 100px solid green;
+	border-left: 100px solid hsl(331, 48%, 16%);
 	border-bottom: 60px solid transparent;
+}
+
+#play-button-wording {
+  position: relative;
+  left: -95px;
+  top: -46px;
+  color: hsl(0, 0%, 94%)
 }
 
 #volume-down-triangle {
@@ -56,7 +73,7 @@ a:hover {
   border-left: 30px solid transparent;
   border-right: 30px solid transparent;
   border-top: 30px solid;
-  color: green;
+  color: hsl(331, 48%, 16%);
 }
 
 #volume-up-triangle {
@@ -67,15 +84,17 @@ a:hover {
   border-left: 30px solid transparent;
   border-right: 30px solid transparent;
   border-bottom: 30px solid;
-  color: green;
-}
-
-#start {
-  position: relative;
-  left: -95px;
-  top: -46px;
+  color: hsl(331, 48%, 16%);
 }
 
 #stars {
   margin: 0
+}
+
+#information {
+  position: relative;
+  float: right;
+  text-align: right;
+  top: -600px;
+  margin-right: 20px;
 }
