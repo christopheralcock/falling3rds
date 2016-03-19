@@ -29,7 +29,6 @@ a:hover {
 }
 
 #triangle-down {
-  /*margin:auto;*/
 	width: 0;
 	height: 0;
 	border-left: 200px solid transparent;
@@ -38,7 +37,7 @@ a:hover {
   color: red;
 }
 
-#triangle-right {
+#play-button {
   position: relative;
   /*top: -350px;*/
   margin: auto;
@@ -47,6 +46,28 @@ a:hover {
 	border-top: 60px solid transparent;
 	border-left: 100px solid green;
 	border-bottom: 60px solid transparent;
+}
+
+#volume-down-triangle {
+  position: relative;
+  margin: auto;
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-top: 30px solid;
+  color: green;
+}
+
+#volume-up-triangle {
+  position: relative;
+  margin: auto;
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 30px solid;
+  color: green;
 }
 
 #start {

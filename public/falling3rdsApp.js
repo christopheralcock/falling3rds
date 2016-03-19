@@ -1,23 +1,24 @@
 var audioContext = new AudioContext();
+
 var falling3rdsApp = {
   currentNumberOfParts: 0,
-  colourEnumerator: 0,
+  notesPlayed: 0,
 
   resetParts: function(){
     this.currentNumberOfParts = 0;
   },
 
   cycleBackgroundColour: function(){
-    this.colourEnumerator += 1;
+    this.notesPlayed += 1;
     var backgroundColour = {
-      hsl: "hsl(" + ((this.colourEnumerator/5) % 360)
-        + ", " + ((60 * Math.sin(this.colourEnumerator/500))+10) + "%, "
-        + (80 - (70 * Math.sin(this.colourEnumerator/400))) + "%)"
+      hsl: "hsl(" + ((this.notesPlayed/5) % 360)
+        + ", " + ((60 * Math.sin(this.notesPlayed/500))+10) + "%, "
+        + (80 - (70 * Math.sin(this.notesPlayed/400))) + "%)"
     };
     var triangleColour = {
-      hsl: "hsl(" + (((this.colourEnumerator+500)/5) % 360)
-        + ", " + (70 * Math.sin((this.colourEnumerator+500)/600)) + "%, "
-        + (100 - (70 * Math.sin((this.colourEnumerator+500)/350))) + "%)"
+      hsl: "hsl(" + (((this.notesPlayed+500)/5) % 360)
+        + ", " + (70 * Math.sin((this.notesPlayed+500)/600)) + "%, "
+        + (100 - (70 * Math.sin((this.notesPlayed+500)/350))) + "%)"
     };
     document.getElementById("fullPage").style.background = backgroundColour.hsl;
     document.getElementById("triangle-down").style.color = triangleColour.hsl;
@@ -63,8 +64,12 @@ var falling3rdsApp = {
     var looper = setInterval(melody,(1000 * melodyLength));
 
     function endMusic(){
-      clearInterval(looper);
+      if (falling3rdsApp.currentNumberOfParts == 0){
+        clearInterval(looper);
+      };
     };
+
+    var stopper = setInterval(endMusic,1)
 
     function chooseNote(){
       return (sample(falling3rdsApp.arpeggioNotes)
@@ -128,7 +133,7 @@ var falling3rdsApp = {
       var startTime = audioContext.currentTime + delay;
       var endTime = startTime + duration;
       var delayLength = Math.random();
-      var panningAmount = (2 * (Math.random())) - 1;
+      var panningAmount = (2 * Math.random()) - 1;
       var envelope = audioContext.createGain();
       var oscillator = audioContext.createOscillator();
       var delayInput = audioContext.createGain();
@@ -169,7 +174,16 @@ window.onload = function(){
   document.getElementById("webAudioTest").innerHTML = "";
 };
 
-document.getElementById("triangle-right").onclick = function(){falling3rdsApp.newMusicalPart()};
-document.getElementById("reset").onclick = function(){falling3rdsApp.resetParts()};
-document.getElementById("volumeUp").onclick = function(){falling3rdsApp.volumeUp()};
-document.getElementById("volumeDown").onclick = function(){falling3rdsApp.volumeDown()};
+document.getElementById("play-button").onclick = function(){
+  falling3rdsApp.newMusicalPart();
+  document.getElementById("start").innerHTML = "more";
+};
+
+document.getElementById("reset").onclick = function(){
+  falling3rdsApp.resetParts();
+  // clearInterval(looper);
+  console.log("reset command sent");
+};
+
+document.getElementById("volume-up-triangle").onclick = function(){falling3rdsApp.volumeUp()};
+document.getElementById("volume-down-triangle").onclick = function(){falling3rdsApp.volumeDown()};
