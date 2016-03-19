@@ -8,6 +8,27 @@ var falling3rdsApp = {
     this.currentNumberOfParts = 0;
   },
 
+  updateStars: function(){
+    if(this.currentNumberOfParts == 0){
+      document.getElementById("stars").innerHTML = "&nbsp;";
+    };
+    if(this.currentNumberOfParts == 1){
+      document.getElementById("stars").innerHTML = "*";
+    };
+    if(this.currentNumberOfParts == 2){
+      document.getElementById("stars").innerHTML = "* &nbsp;*";
+    };
+    if(this.currentNumberOfParts == 3){
+      document.getElementById("stars").innerHTML = "* &nbsp;* &nbsp;*";
+    };
+    if(this.currentNumberOfParts == 4){
+      document.getElementById("stars").innerHTML = "* &nbsp;* &nbsp;* &nbsp;*";
+    };
+    if(this.currentNumberOfParts > 4){
+      document.getElementById("stars").innerHTML = "* &nbsp;* &nbsp;* &nbsp;* &nbsp;*";
+    };
+  },
+
   cycleBackgroundColour: function(){
     this.notesPlayed += 1;
     var backgroundColour = {
@@ -175,14 +196,19 @@ window.onload = function(){
 };
 
 document.getElementById("play-button").onclick = function(){
-  falling3rdsApp.newMusicalPart();
-  document.getElementById("start").innerHTML = "more";
+  if(falling3rdsApp.currentNumberOfParts < 5){falling3rdsApp.newMusicalPart()};
+  if(falling3rdsApp.currentNumberOfParts < 5){document.getElementById("start").innerHTML = "more"};
+  if(falling3rdsApp.currentNumberOfParts == 5){document.getElementById("start").innerHTML = "&nbsp;"};
+
+  document.getElementById("reset").innerHTML = "stop";
+  falling3rdsApp.updateStars();
 };
 
 document.getElementById("reset").onclick = function(){
   falling3rdsApp.resetParts();
-  // clearInterval(looper);
-  console.log("reset command sent");
+  document.getElementById("start").innerHTML = "play";
+  document.getElementById("stars").innerHTML = "&nbsp;";
+  document.getElementById("reset").innerHTML = "&nbsp;";
 };
 
 document.getElementById("volume-up-triangle").onclick = function(){falling3rdsApp.volumeUp()};

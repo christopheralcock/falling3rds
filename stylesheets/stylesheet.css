@@ -11,6 +11,7 @@ body {
   text-align: center;
   color: #1C1C1C;
   font-style: italic;
+  margin-bottom: -100px;
 }
 
 a {
@@ -21,7 +22,6 @@ a {
 a:hover {
     text-decoration: underline;
 }
-
 
 #triangle-contents {
   position: relative;
@@ -74,4 +74,8 @@ a:hover {
   position: relative;
   left: -95px;
   top: -46px;
+}
+
+#stars {
+  margin: 0
 }
