@@ -29,22 +29,39 @@ var falling3rdsApp = {
     };
   },
 
+  fluctuate: function(count, max){
+    if ((parseInt(count / max)) % 2 == 0){
+      return count - (parseInt(count / max) * max);
+    } else {
+      return max - (count - (parseInt(count / max) * max));
+    };
+  },
+
   cycleBackgroundColour: function(){
     this.notesPlayed += 1;
-    var backgroundColour = {
-      hsl: "hsl(" + ((this.notesPlayed/5) % 360)
-        + ", " + ((60 * Math.sin(this.notesPlayed/500))+10) + "%, "
-        + (80 - (70 * Math.sin(this.notesPlayed/400))) + "%)"
-    };
-    var triangleColour = {
-      hsl: "hsl(" + (((this.notesPlayed+500)/5) % 360)
-        + ", " + (70 * Math.sin((this.notesPlayed+500)/600)) + "%, "
-        + (100 - (70 * Math.sin((this.notesPlayed+500)/350))) + "%)"
-    };
-    document.getElementById("fullPage").style.background = backgroundColour.hsl;
-    document.getElementById("triangle-down").style.color = triangleColour.hsl;
-    console.log("triangle colour: " + triangleColour.hsl);
-    console.log("background colour: " + backgroundColour.hsl);
+
+    // hsl(229, 26%, 88%)
+//bgH: i want this number to start at 229, and modulo around 360
+    var bgH = (this.notesPlayed + 226) % 360;
+//bgS: i want this number to start at 26, rise to 86, fall to 26, rise...
+    var bgS = this.fluctuate((this.notesPlayed - 3), 60) + 26;
+//bgL: i want this number to start at 88, fall to 16, rise to 88, fall...
+    var bgL = 88 - this.fluctuate((this.notesPlayed - 3), 72);
+    var backgroundColour = "hsl(" + bgH + ", " + bgS + "%, " + bgL + "%)";
+
+    // (233, 43%, 45%)
+//triH: i want this number to start at 233, and modulo around 360
+    var triH = (this.notesPlayed + 230) % 360;
+//triS: i want this number to start at 43, rise to 86, fall to 26, rise...
+    var triS = this.fluctuate((this.notesPlayed + 14), 60) + 26;
+//triL: i want this number to start at 45, rise to 85, fall to 25, rise
+    var triL = this.fluctuate((this.notesPlayed + 17), 60) + 25;
+    var triangleColour = "hsl(" + triH + ", " + triS + "%, " + triL + "%)";
+
+    document.getElementById("fullPage").style.background = backgroundColour;
+    document.getElementById("triangle-down").style.color = triangleColour;
+    console.log("triangle colour: " + triangleColour);
+    console.log("background colour: " + backgroundColour);
   },
 
   arpeggioNotes: [0,0,4,4,7],

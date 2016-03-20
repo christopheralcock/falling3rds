@@ -18,6 +18,7 @@ body {
   font-style: italic;
   margin-bottom: -100px;
   height:800px;
+  background-color: hsl(229, 26%, 88%);
 }
 
 a {
@@ -44,8 +45,7 @@ h2 {
 	border-left: 200px solid transparent;
 	border-right: 200px solid transparent;
 	border-top: 700px solid;
-  color: #D1345B;
-  /*hsl(345, 75%, 82%);*/
+  color: hsl(233, 43%, 45%);
 }
 
 #play-button {
