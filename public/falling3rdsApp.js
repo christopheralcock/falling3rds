@@ -2,7 +2,7 @@ var audioContext = new AudioContext();
 
 var falling3rdsApp = {
   currentNumberOfParts: 0,
-  notesPlayed: 0,
+  colourStage: 0,
 
   resetParts: function(){
     this.currentNumberOfParts = 0;
@@ -29,6 +29,27 @@ var falling3rdsApp = {
     };
   },
 
+  addedByFirstClick: 3,
+  maxSaturation: 80,
+  maxLight: 90,
+  minSaturation: 20,
+  minLight: 20,
+  triangleSpeed: Math.random(),
+  backgroundSpeed: Math.random(),
+
+  controlColours: function(){
+    var startColours = setInterval(this.cycleBackgroundColour,200);
+
+    function stopColours(){
+      if (falling3rdsApp.currentNumberOfParts == 0){
+        clearInterval(startColours);
+      };
+    };
+
+    var stopper = setInterval(stopColours,1);
+  },
+
+
   fluctuate: function(count, max){
     if ((parseInt(count / max)) % 2 == 0){
       return count - (parseInt(count / max) * max);
@@ -37,25 +58,23 @@ var falling3rdsApp = {
     };
   },
 
-  cycleBackgroundColour: function(){
-    this.notesPlayed += 1;
+  fluctuateOffset: function(count, max, min, start, speed){
+    var adjustedCount = (count * speed) + start - ((this.addedByFirstClick * speed) + min);
+    var range = max - min;
+    return this.fluctuate(adjustedCount, range) + min;
+  },
 
-    // hsl(229, 26%, 88%)
-//bgH: i want this number to start at 229, and modulo around 360
-    var bgH = (this.notesPlayed + 226) % 360;
-//bgS: i want this number to start at 26, rise to 86, fall to 26, rise...
-    var bgS = this.fluctuate((this.notesPlayed - 3), 60) + 26;
-//bgL: i want this number to start at 88, fall to 16, rise to 88, fall...
-    var bgL = 88 - this.fluctuate((this.notesPlayed - 3), 72);
+  cycleBackgroundColour: function(){
+    falling3rdsApp.colourStage += 1;
+
+    var bgH = (falling3rdsApp.colourStage + 229 - falling3rdsApp.addedByFirstClick) % 360;
+    var bgS = falling3rdsApp.fluctuateOffset(falling3rdsApp.colourStage, falling3rdsApp.maxSaturation, falling3rdsApp.minSaturation, 26, falling3rdsApp.backgroundSpeed);
+    var bgL = falling3rdsApp.fluctuateOffset(falling3rdsApp.colourStage, falling3rdsApp.maxLight, falling3rdsApp.minLight, 88, falling3rdsApp.backgroundSpeed);
     var backgroundColour = "hsl(" + bgH + ", " + bgS + "%, " + bgL + "%)";
 
-    // (233, 43%, 45%)
-//triH: i want this number to start at 233, and modulo around 360
-    var triH = (this.notesPlayed + 230) % 360;
-//triS: i want this number to start at 43, rise to 86, fall to 26, rise...
-    var triS = this.fluctuate((this.notesPlayed + 14), 60) + 26;
-//triL: i want this number to start at 45, rise to 85, fall to 25, rise
-    var triL = this.fluctuate((this.notesPlayed + 17), 60) + 25;
+    var triH = (falling3rdsApp.colourStage + 233 - falling3rdsApp.addedByFirstClick) % 360;
+    var triS = falling3rdsApp.fluctuateOffset(falling3rdsApp.colourStage, falling3rdsApp.maxSaturation, falling3rdsApp.minSaturation, 43, falling3rdsApp.triangleSpeed);
+    var triL = falling3rdsApp.fluctuateOffset(falling3rdsApp.colourStage, falling3rdsApp.maxLight, falling3rdsApp.minLight, 45, falling3rdsApp.triangleSpeed);
     var triangleColour = "hsl(" + triH + ", " + triS + "%, " + triL + "%)";
 
     document.getElementById("fullPage").style.background = backgroundColour;
@@ -92,6 +111,7 @@ var falling3rdsApp = {
 
   newMusicalPart: function(){
     falling3rdsApp.currentNumberOfParts += 1;
+
     var id = falling3rdsApp.currentNumberOfParts;
     var noteSet = [chooseNote(), chooseNote(), chooseNote()];
     var noteLengths = [0.5, 0.33, 1, 0.66, 0.11, 2, 3, 5, 0.75];
@@ -107,7 +127,7 @@ var falling3rdsApp = {
       };
     };
 
-    var stopper = setInterval(endMusic,1)
+    var stopper = setInterval(endMusic,1);
 
     function chooseNote(){
       return (sample(falling3rdsApp.arpeggioNotes)
@@ -152,7 +172,7 @@ var falling3rdsApp = {
     };
 
     function play(delay, pitch, duration, wave) {
-      falling3rdsApp.cycleBackgroundColour();
+      // falling3rdsApp.cycleBackgroundColour();
 
       if (falling3rdsApp.currentNumberOfParts == 0){
         endMusic();
@@ -212,9 +232,11 @@ window.onload = function(){
   document.getElementById("webAudioTest").innerHTML = "";
 };
 
+
 document.getElementById("play-button").onclick = function(){
   if (falling3rdsApp.currentNumberOfParts < 5) {
-    falling3rdsApp.newMusicalPart()
+    falling3rdsApp.newMusicalPart();
+    falling3rdsApp.controlColours();
   };
   if (falling3rdsApp.currentNumberOfParts < 5) {
     document.getElementById("play-button-wording").innerHTML = "more";
@@ -228,6 +250,7 @@ document.getElementById("play-button").onclick = function(){
 
 document.getElementById("reset").onclick = function(){
   falling3rdsApp.resetParts();
+  falling3rdsApp.controlColours();
   document.getElementById("play-button-wording").innerHTML = "play";
   document.getElementById("stars").innerHTML = "&nbsp;";
   document.getElementById("reset").innerHTML = "&nbsp;";

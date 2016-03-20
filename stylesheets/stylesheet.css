@@ -34,6 +34,10 @@ h2 {
   margin-top: 10px;
 }
 
+h3 {
+  margin: 0px;
+}
+
 #triangle-contents {
   position: relative;
   top: -700px;
@@ -88,13 +92,13 @@ h2 {
 }
 
 #stars {
-  margin: 0
+  margin: -9;
 }
 
 #information {
   position: relative;
   float: right;
   text-align: right;
-  top: -600px;
+  top: -575px;
   margin-right: 20px;
 }
