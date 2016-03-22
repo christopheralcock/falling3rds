@@ -245,6 +245,9 @@ document.getElementById("reset").onclick = function(){
   clearInterval(falling3rdsApp.startColours);
   clearInterval(falling3rdsApp.startColours);
   clearInterval(falling3rdsApp.startColours);
+  clearInterval(falling3rdsApp.startColours);
+  clearInterval(falling3rdsApp.startColours);
+  clearInterval(falling3rdsApp.startColours);
   document.getElementById("play-button-wording").innerHTML = "play";
   document.getElementById("stars").innerHTML = "&nbsp;";
   document.getElementById("reset").innerHTML = "&nbsp;";
