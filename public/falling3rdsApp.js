@@ -4,8 +4,10 @@ var falling3rdsApp = {
   currentNumberOfParts: 0,
   colourStage: 0,
 
-  resetParts: function(){
-    this.currentNumberOfParts = 0;
+  updateLoopControls: function(){
+    this.updateStars();
+    this.updateStop();
+    this.updatePlay();
   },
 
   updateStars: function(){
@@ -17,6 +19,29 @@ var falling3rdsApp = {
     document.getElementById("stars").innerHTML = output;
   },
 
+  updateStop: function(){
+    if (this.currentNumberOfParts == 0) {
+      document.getElementById("stop").innerHTML = "&nbsp;";
+    } else if (this.currentNumberOfParts == 1) {
+      document.getElementById("stop").innerHTML = "stop";
+    } else {
+      document.getElementById("stop").innerHTML = "less";
+    };
+  },
+
+  updatePlay: function(){
+
+    if (this.currentNumberOfParts == 0){
+      document.getElementById("play-button-wording").innerHTML = "play";
+      document.getElementById("play-button").style = "position: relative; margin: auto; width: 0; height: 0; border-top: 60px solid transparent; border-left: 100px solid hsl(331, 48%, 16%); border-bottom: 60px solid transparent;";
+    } else if (this.currentNumberOfParts < 5) {
+      document.getElementById("play-button-wording").innerHTML = "more";
+    } else {
+      document.getElementById("play-button-wording").innerHTML = "enjoy";
+      document.getElementById("play-button").style = "position: relative; margin: auto; width: 0; height: 0; border-top: 60px solid transparent; border-left: 100px solid transparent; border-bottom: 60px solid transparent;";
+    };
+  },
+
   addedByFirstClick: 3,
   maxSaturation: 80,
   maxLight: 90,
@@ -25,11 +50,12 @@ var falling3rdsApp = {
   triangleSpeed: Math.random(),
   backgroundSpeed: Math.random(),
   colourSuperSpeed: 300,
-  intervals: [],
+  musicLoops: [],
+  colourLoops: [],
 
   cycleColours: function(){
     this.startColours = setInterval(this.cycleBackgroundColour,this.colourSuperSpeed);
-    this.intervals.push(this.startColours);
+    this.colourLoops.push(this.startColours);
   },
 
   fluctuate: function(count, max){
@@ -100,7 +126,7 @@ var falling3rdsApp = {
 	  var melodyLength = sample(this.repeatPeriods);
 	  melody();
     this.looper = setInterval(melody,(1000 * melodyLength));
-    this.intervals.push(this.looper);
+    this.musicLoops.push(this.looper);
 
     function endMusic(){
       if (falling3rdsApp.currentNumberOfParts == 0){
@@ -207,25 +233,16 @@ document.getElementById("play-button").onclick = function(){
     falling3rdsApp.newMusicalPart();
     falling3rdsApp.cycleColours();
   };
-  if (falling3rdsApp.currentNumberOfParts < 5) {
-    document.getElementById("play-button-wording").innerHTML = "more";
-  } else {
-    document.getElementById("play-button-wording").innerHTML = "enjoy";
-    document.getElementById("play-button").style = "position: relative; margin: auto; width: 0; height: 0; border-top: 60px solid transparent; border-left: 100px solid transparent; border-bottom: 60px solid transparent;";
-  };
-  document.getElementById("stop").innerHTML = "stop";
-  falling3rdsApp.updateStars();
+  falling3rdsApp.updateLoopControls();
 };
 
 document.getElementById("stop").onclick = function(){
-  falling3rdsApp.resetParts();
-  while (falling3rdsApp.intervals.length > 0) {
-    clearInterval(falling3rdsApp.intervals.pop())
+  clearInterval(falling3rdsApp.colourLoops.pop());
+  clearInterval(falling3rdsApp.musicLoops.pop());
+  if (falling3rdsApp.currentNumberOfParts > 0) {
+    falling3rdsApp.currentNumberOfParts -= 1;
   };
-  document.getElementById("play-button-wording").innerHTML = "play";
-  document.getElementById("stars").innerHTML = "&nbsp;";
-  document.getElementById("stop").innerHTML = "&nbsp;";
-  document.getElementById("play-button").style = "position: relative; margin: auto; width: 0; height: 0; border-top: 60px solid transparent; border-left: 100px solid hsl(331, 48%, 16%); border-bottom: 60px solid transparent;";
+  falling3rdsApp.updateLoopControls();
 };
 
 document.getElementById("volume-up-triangle").onclick = function(){
