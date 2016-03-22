@@ -241,13 +241,7 @@ document.getElementById("play-button").onclick = function(){
 document.getElementById("reset").onclick = function(){
   falling3rdsApp.resetParts();
   //falling3rdsApp.controlColours();
-  clearInterval(falling3rdsApp.startColours);
-  clearInterval(falling3rdsApp.startColours);
-  clearInterval(falling3rdsApp.startColours);
-  clearInterval(falling3rdsApp.startColours);
-  clearInterval(falling3rdsApp.startColours);
-  clearInterval(falling3rdsApp.startColours);
-  clearInterval(falling3rdsApp.startColours);
+  clearInterval(window);
   document.getElementById("play-button-wording").innerHTML = "play";
   document.getElementById("stars").innerHTML = "&nbsp;";
   document.getElementById("reset").innerHTML = "&nbsp;";
