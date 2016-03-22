@@ -8,26 +8,36 @@ var falling3rdsApp = {
     this.currentNumberOfParts = 0;
   },
 
+//  updateStars: function(){
+//   if(this.currentNumberOfParts == 0){
+//      document.getElementById("stars").innerHTML = "&nbsp;";
+//    };
+//    if(this.currentNumberOfParts == 1){
+//      document.getElementById("stars").innerHTML = "*";
+//    };
+//    if(this.currentNumberOfParts == 2){
+//      document.getElementById("stars").innerHTML = "* &nbsp;*";
+//    };
+//    if(this.currentNumberOfParts == 3){
+//      document.getElementById("stars").innerHTML = "* &nbsp;* &nbsp;*";
+//    };
+//    if(this.currentNumberOfParts == 4){
+//      document.getElementById("stars").innerHTML = "* &nbsp;* &nbsp;* &nbsp;*";
+//    };
+//    if(this.currentNumberOfParts > 4){
+//      document.getElementById("stars").innerHTML = "* &nbsp;* &nbsp;* &nbsp;* &nbsp;*";
+//    };
+//  },
+  
+  
   updateStars: function(){
-    if(this.currentNumberOfParts == 0){
-      document.getElementById("stars").innerHTML = "&nbsp;";
-    };
-    if(this.currentNumberOfParts == 1){
-      document.getElementById("stars").innerHTML = "*";
-    };
-    if(this.currentNumberOfParts == 2){
-      document.getElementById("stars").innerHTML = "* &nbsp;*";
-    };
-    if(this.currentNumberOfParts == 3){
-      document.getElementById("stars").innerHTML = "* &nbsp;* &nbsp;*";
-    };
-    if(this.currentNumberOfParts == 4){
-      document.getElementById("stars").innerHTML = "* &nbsp;* &nbsp;* &nbsp;*";
-    };
-    if(this.currentNumberOfParts > 4){
-      document.getElementById("stars").innerHTML = "* &nbsp;* &nbsp;* &nbsp;* &nbsp;*";
-    };
-  },
+    var stars = [];
+    for (var i = 1; i <= this.currentNumberOfParts; i++) {
+      stars.push("*");
+    }
+    var output = stars.length > 0 ? stars.join(" &nbsp;") : "&nbsp;";
+    document.getElementById("stars").innerHTML = output;
+  }
 
   addedByFirstClick: 3,
   maxSaturation: 80,
