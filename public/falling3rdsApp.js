@@ -7,28 +7,6 @@ var falling3rdsApp = {
   resetParts: function(){
     this.currentNumberOfParts = 0;
   },
-
-//  updateStars: function(){
-//   if(this.currentNumberOfParts == 0){
-//      document.getElementById("stars").innerHTML = "&nbsp;";
-//    };
-//    if(this.currentNumberOfParts == 1){
-//      document.getElementById("stars").innerHTML = "*";
-//    };
-//    if(this.currentNumberOfParts == 2){
-//      document.getElementById("stars").innerHTML = "* &nbsp;*";
-//    };
-//    if(this.currentNumberOfParts == 3){
-//      document.getElementById("stars").innerHTML = "* &nbsp;* &nbsp;*";
-//    };
-//    if(this.currentNumberOfParts == 4){
-//      document.getElementById("stars").innerHTML = "* &nbsp;* &nbsp;* &nbsp;*";
-//    };
-//    if(this.currentNumberOfParts > 4){
-//      document.getElementById("stars").innerHTML = "* &nbsp;* &nbsp;* &nbsp;* &nbsp;*";
-//    };
-//  },
-  
   
   updateStars: function(){
     var stars = [];
