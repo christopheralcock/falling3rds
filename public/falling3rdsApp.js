@@ -37,7 +37,7 @@ var falling3rdsApp = {
     }
     var output = stars.length > 0 ? stars.join(" &nbsp;") : "&nbsp;";
     document.getElementById("stars").innerHTML = output;
-  }
+  },
 
   addedByFirstClick: 3,
   maxSaturation: 80,
