@@ -24,9 +24,10 @@ var falling3rdsApp = {
   minLight: 20,
   triangleSpeed: Math.random(),
   backgroundSpeed: Math.random(),
+  colourSuperSpeed: 250,
 
   controlColours: function(){
-    var startColours = setInterval(this.cycleBackgroundColour,200);
+    var startColours = setInterval(this.cycleBackgroundColour,this.colourSuperSpeed);
 
     function stopColours(){
       if (falling3rdsApp.currentNumberOfParts == 0){
