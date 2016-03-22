@@ -60,6 +60,7 @@ h3 {
 	border-top: 60px solid transparent;
 	border-left: 100px solid hsl(331, 48%, 16%);
 	border-bottom: 60px solid transparent;
+  cursor: pointer;
 }
 
 #play-button-wording {
@@ -67,6 +68,10 @@ h3 {
   left: -95px;
   top: -46px;
   color: hsl(0, 0%, 94%)
+}
+
+#stop{
+  cursor: pointer;
 }
 
 #volume-down-triangle {
@@ -78,6 +83,7 @@ h3 {
   border-right: 30px solid transparent;
   border-top: 30px solid;
   color: hsl(331, 48%, 16%);
+  cursor: pointer;
 }
 
 #volume-up-triangle {
@@ -89,6 +95,7 @@ h3 {
   border-right: 30px solid transparent;
   border-bottom: 30px solid;
   color: hsl(331, 48%, 16%);
+  cursor: pointer;
 }
 
 #stars {
