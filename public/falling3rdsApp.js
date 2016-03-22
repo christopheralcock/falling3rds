@@ -7,7 +7,7 @@ var falling3rdsApp = {
   resetParts: function(){
     this.currentNumberOfParts = 0;
   },
-  
+
   updateStars: function(){
     var stars = [];
     for (var i = 1; i <= this.currentNumberOfParts; i++) {
@@ -24,21 +24,13 @@ var falling3rdsApp = {
   minLight: 20,
   triangleSpeed: Math.random(),
   backgroundSpeed: Math.random(),
-  colourSuperSpeed: 250,
+  colourSuperSpeed: 300,
+  intervals: [],
 
-  controlColours: function(){
-    // var startColours = setInterval(this.cycleBackgroundColour,this.colourSuperSpeed);
+  cycleColours: function(){
     this.startColours = setInterval(this.cycleBackgroundColour,this.colourSuperSpeed);
-    
-    //function stopColours(){
-    //  if (falling3rdsApp.currentNumberOfParts == 0){
-    //    clearInterval(startColours);
-    //  };
-    //};
-
-    //var stopper = setInterval(stopColours,1);
+    this.intervals.push(this.startColours);
   },
-
 
   fluctuate: function(count, max){
     if ((parseInt(count / max)) % 2 == 0){
@@ -69,8 +61,6 @@ var falling3rdsApp = {
 
     document.getElementById("fullPage").style.background = backgroundColour;
     document.getElementById("triangle-down").style.color = triangleColour;
-    console.log("triangle colour: " + triangleColour);
-    console.log("background colour: " + backgroundColour);
   },
 
   arpeggioNotes: [0,0,4,4,7],
@@ -109,15 +99,14 @@ var falling3rdsApp = {
 	  var wave = sample(this.availableWaves);
 	  var melodyLength = sample(this.repeatPeriods);
 	  melody();
-    var looper = setInterval(melody,(1000 * melodyLength));
+    this.looper = setInterval(melody,(1000 * melodyLength));
+    this.intervals.push(this.looper);
 
     function endMusic(){
       if (falling3rdsApp.currentNumberOfParts == 0){
         clearInterval(looper);
       };
     };
-
-    var stopper = setInterval(endMusic,1);
 
     function chooseNote(){
       return (sample(falling3rdsApp.arpeggioNotes)
@@ -146,27 +135,18 @@ var falling3rdsApp = {
       var step = number % 24;
       var majorOrMinor = "major";
       var cycleAdjustment = 0;
-
       if (step % 2 == 1) {
         cycleAdjustment = 0.5;
         majorOrMinor = "minor";
       };
-
       var transpose = (step * -3.5) + cycleAdjustment;
-
       while (transpose < -3) {
         transpose += 12;
       };
-
       return [transpose, majorOrMinor];
     };
 
     function play(delay, pitch, duration, wave) {
-      // falling3rdsApp.cycleBackgroundColour();
-
-      if (falling3rdsApp.currentNumberOfParts == 0){
-        endMusic();
-      };
 
       var progressiveTime = new Date();
       var secondsIntoMonth = timeInSeconds(progressiveTime);
@@ -222,11 +202,10 @@ window.onload = function(){
   document.getElementById("webAudioTest").innerHTML = "";
 };
 
-
 document.getElementById("play-button").onclick = function(){
   if (falling3rdsApp.currentNumberOfParts < 5) {
     falling3rdsApp.newMusicalPart();
-    falling3rdsApp.controlColours();
+    falling3rdsApp.cycleColours();
   };
   if (falling3rdsApp.currentNumberOfParts < 5) {
     document.getElementById("play-button-wording").innerHTML = "more";
@@ -234,17 +213,18 @@ document.getElementById("play-button").onclick = function(){
     document.getElementById("play-button-wording").innerHTML = "enjoy";
     document.getElementById("play-button").style = "position: relative; margin: auto; width: 0; height: 0; border-top: 60px solid transparent; border-left: 100px solid transparent; border-bottom: 60px solid transparent;";
   };
-  document.getElementById("reset").innerHTML = "stop";
+  document.getElementById("stop").innerHTML = "stop";
   falling3rdsApp.updateStars();
 };
 
-document.getElementById("reset").onclick = function(){
+document.getElementById("stop").onclick = function(){
   falling3rdsApp.resetParts();
-  //falling3rdsApp.controlColours();
-  clearInterval(window);
+  while (falling3rdsApp.intervals.length > 0) {
+    clearInterval(falling3rdsApp.intervals.pop())
+  };
   document.getElementById("play-button-wording").innerHTML = "play";
   document.getElementById("stars").innerHTML = "&nbsp;";
-  document.getElementById("reset").innerHTML = "&nbsp;";
+  document.getElementById("stop").innerHTML = "&nbsp;";
   document.getElementById("play-button").style = "position: relative; margin: auto; width: 0; height: 0; border-top: 60px solid transparent; border-left: 100px solid hsl(331, 48%, 16%); border-bottom: 60px solid transparent;";
 };
 
