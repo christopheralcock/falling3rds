@@ -27,15 +27,16 @@ var falling3rdsApp = {
   colourSuperSpeed: 250,
 
   controlColours: function(){
-    var startColours = setInterval(this.cycleBackgroundColour,this.colourSuperSpeed);
+    // var startColours = setInterval(this.cycleBackgroundColour,this.colourSuperSpeed);
+    this.startColours = setInterval(this.cycleBackgroundColour,this.colourSuperSpeed);
+    
+    //function stopColours(){
+    //  if (falling3rdsApp.currentNumberOfParts == 0){
+    //    clearInterval(startColours);
+    //  };
+    //};
 
-    function stopColours(){
-      if (falling3rdsApp.currentNumberOfParts == 0){
-        clearInterval(startColours);
-      };
-    };
-
-    var stopper = setInterval(stopColours,1);
+    //var stopper = setInterval(stopColours,1);
   },
 
 
@@ -239,7 +240,8 @@ document.getElementById("play-button").onclick = function(){
 
 document.getElementById("reset").onclick = function(){
   falling3rdsApp.resetParts();
-  falling3rdsApp.controlColours();
+  //falling3rdsApp.controlColours();
+  stopper = setInterval(falling3rdsapp.startColours);
   document.getElementById("play-button-wording").innerHTML = "play";
   document.getElementById("stars").innerHTML = "&nbsp;";
   document.getElementById("reset").innerHTML = "&nbsp;";
