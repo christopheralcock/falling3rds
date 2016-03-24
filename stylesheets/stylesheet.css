@@ -64,7 +64,7 @@ h3 {
   }
 }
 
-@media (max-width: 300px) {
+@media (max-width: 250px) {
   #triangle-down {
     border-top: 700px solid;  
   }
