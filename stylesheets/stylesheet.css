@@ -58,6 +58,13 @@ h3 {
   }
 }
 
+@media (max-width: 400px) {
+  #triangle-down {
+    margin: auto;
+    border-top: 10000px solid;
+  }
+}
+
 
 #play-button {
   position: relative;
