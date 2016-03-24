@@ -78,15 +78,13 @@ var falling3rdsApp = {
 
   cycleBackgroundColour: function(){
     falling3rdsApp.colourStage += 1;
-
-    //var bgH = (falling3rdsApp.colourStage + 229 - falling3rdsApp.addedByFirstClick) % 360;
-    
     var bgH = falling3rdsApp.rotateColours(229, 0.5);
     var bgS = falling3rdsApp.fluctuateOffset(falling3rdsApp.colourStage, falling3rdsApp.maxSaturation, falling3rdsApp.minSaturation, 26, falling3rdsApp.backgroundSpeed);
     var bgL = falling3rdsApp.fluctuateOffset(falling3rdsApp.colourStage, falling3rdsApp.maxLight, falling3rdsApp.minLight, 88, falling3rdsApp.backgroundSpeed);
     var backgroundColour = "hsl(" + bgH + ", " + bgS + "%, " + bgL + "%)";
 
-    var triH = (falling3rdsApp.colourStage + 233 - falling3rdsApp.addedByFirstClick) % 360;
+    var triH = falling3rdsApp.rotateColours(233, 0.5);
+    //(falling3rdsApp.colourStage + 233 - falling3rdsApp.addedByFirstClick) % 360;
     var triS = falling3rdsApp.fluctuateOffset(falling3rdsApp.colourStage, falling3rdsApp.maxSaturation, falling3rdsApp.minSaturation, 43, falling3rdsApp.triangleSpeed);
     var triL = falling3rdsApp.fluctuateOffset(falling3rdsApp.colourStage, falling3rdsApp.maxLight, falling3rdsApp.minLight, 45, falling3rdsApp.triangleSpeed);
     var triangleColour = "hsl(" + triH + ", " + triS + "%, " + triL + "%)";
