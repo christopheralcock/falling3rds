@@ -60,8 +60,13 @@ h3 {
 
 @media (max-width: 399px) {
   #triangle-down {
-    margin: auto;
     border-top: 700px solid transparent;  
+  }
+}
+
+@media (max-width: 200px) {
+  #triangle-down {
+    border-top: 700px solid;  
   }
 }
 
