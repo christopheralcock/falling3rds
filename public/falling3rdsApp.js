@@ -59,7 +59,7 @@ var falling3rdsApp = {
   },
   
   rotateColours: function(start, speed){
-    return ((this.colourStage + start - this.addedByFirstClick) * speed) % 360;
+    return (((this.colourStage + start - this.addedByFirstClick) * speed )+((1 - speed)*(start - this.addedByFirstClick))) % 360;
   },
 
   fluctuate: function(count, max){
