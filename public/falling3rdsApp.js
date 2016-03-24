@@ -57,6 +57,10 @@ var falling3rdsApp = {
     this.startColours = setInterval(this.cycleBackgroundColour,this.colourSuperSpeed);
     this.colourLoops.push(this.startColours);
   },
+  
+  rotateColours: function(start, speed){
+    return ((this.colourStage + start - this.addedByFirstClick) * speed)) % 360;
+  },
 
   fluctuate: function(count, max){
     if ((parseInt(count / max)) % 2 == 0){
@@ -75,7 +79,9 @@ var falling3rdsApp = {
   cycleBackgroundColour: function(){
     falling3rdsApp.colourStage += 1;
 
-    var bgH = (falling3rdsApp.colourStage + 229 - falling3rdsApp.addedByFirstClick) % 360;
+    //var bgH = (falling3rdsApp.colourStage + 229 - falling3rdsApp.addedByFirstClick) % 360;
+    
+    var bgH = falling3rdsApp.rotateColours(229, 0.5);
     var bgS = falling3rdsApp.fluctuateOffset(falling3rdsApp.colourStage, falling3rdsApp.maxSaturation, falling3rdsApp.minSaturation, 26, falling3rdsApp.backgroundSpeed);
     var bgL = falling3rdsApp.fluctuateOffset(falling3rdsApp.colourStage, falling3rdsApp.maxLight, falling3rdsApp.minLight, 88, falling3rdsApp.backgroundSpeed);
     var backgroundColour = "hsl(" + bgH + ", " + bgS + "%, " + bgL + "%)";
