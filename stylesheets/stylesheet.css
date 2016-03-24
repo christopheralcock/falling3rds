@@ -58,10 +58,10 @@ h3 {
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 399px) {
   #triangle-down {
     margin: auto;
-    border-top: 10000px solid;
+    border-top: 700px solid transparent;  
   }
 }
 
