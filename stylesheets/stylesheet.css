@@ -44,13 +44,20 @@ h3 {
 }
 
 #triangle-down {
-	width: 0;
-	height: 0;
-	border-left: 200px solid transparent;
-	border-right: 200px solid transparent;
-	border-top: 700px solid;
+  width: 0;
+  height: 0;
+  border-left: 200px solid transparent;
+  border-right: 200px solid transparent;
+  border-top: 700px solid;
   color: hsl(233, 43%, 45%);
 }
+
+@media (max-width: 566px) {
+  #triangle-down {
+    margin: auto;
+  }
+}
+
 
 #play-button {
   position: relative;
