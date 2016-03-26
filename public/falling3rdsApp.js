@@ -1,5 +1,9 @@
 var audioContext = new AudioContext();
 
+var colourCyclerApp = {
+  
+}
+
 var falling3rdsApp = {
   currentNumberOfParts: 0,
   colourStage: 0,
@@ -57,7 +61,7 @@ var falling3rdsApp = {
     this.startColours = setInterval(this.cycleBackgroundColour,this.colourSuperSpeed);
     this.colourLoops.push(this.startColours);
   },
-  
+
   rotateColours: function(start, speed){
     return (((this.colourStage + start - this.addedByFirstClick) * speed )+((1 - speed)*(start - this.addedByFirstClick))) % 360;
   },
