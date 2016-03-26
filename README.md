@@ -7,8 +7,11 @@ The chord is determined by your clock (how many second into the month you are, t
 
 The delay/echo effect on the notes adds a lot to the texture, but can be quite resource intensive, and so I've limited the buttons on the page to 5 concurrent layers of notes.
 
-I owe a lot of gratitude to my friends who have advised me on code issues, Joe Corcoron, Daniel Harvey and Alex Norman.
 
+# Further issues preventing it working
+
+Essentially it will work if you are using Chrome or Firefox on a PC or Android phone, and have Javascript turned on.
+Other issues could be caused by a clash with existing extensions, or you having more than 6 instances of AudioContext working in one browser window.
 
 # Chord Sequence
 
