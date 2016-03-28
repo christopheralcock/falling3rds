@@ -6,15 +6,14 @@ Falling Thirds is my most complete HTML5 Audio app as of March 2016.  It plays r
 
 The chord is determined by your clock (how many second into the month you are, to be precise), so as long as your clocks are accurate to within about 20 seconds, you can open the site on multiple devices and experience the sound environment in surround, which was the original intention of the piece.
 
-The delay/echo effect on the notes adds a lot to the texture, but can be quite resource intensive, and so I've limited the buttons on the page to 5 concurrent layers of notes.  Even this could be too much for some older computers, so use sparingly or limit the amount of other resource-intensive things you are doing with your computer if you want to avoid the sound cutting out.
-
-If you just want to hear it and don't care about the visuals, an earlier, simpler, less-well-written version of the audio part of the site is available [here](http://variousmusicappsofchris.herokuapp.com/sym2).
-
-
 # Trouble-shooting
 
 Essentially it will work if you are using Chrome or Firefox on a PC or Android phone, and have Javascript turned on.
 Other issues could be caused by a clash with existing extensions, or you having more than 6 instances of AudioContext working in one browser window.
+
+The delay/echo effect on the notes adds a lot to the texture, but can be quite resource intensive, and so I've limited the buttons on the page to 5 concurrent layers of notes.  Even this could be too much for some older computers, so use sparingly or limit the amount of other resource-intensive things you are doing with your computer if you want to avoid the sound cutting out.
+
+If you just want to hear it and don't care about the visuals, an earlier, simpler, less-well-written version of the audio part of the site is available [here](http://variousmusicappsofchris.herokuapp.com/sym2).
 
 # Chord Sequence
 
