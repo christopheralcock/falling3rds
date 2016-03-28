@@ -24,4 +24,4 @@ Particular thanks go to [Joe Corcoran](https://corcoran.io/), [Dan Harvey](http:
 
 # Please give me a job
 
-I'm based in London and trying to make a career change into Web Development. My CV can be found [here](github.com/christopheralcock/cv). I'm not looking for anything specifically to do with music.
+I'm based in London and trying to make a career change into Web Development. My CV can be found [here](http://github.com/christopheralcock/cv). I'm not looking for anything specifically to do with music.
