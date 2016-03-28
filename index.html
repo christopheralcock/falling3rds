@@ -1,213 +1,46 @@
-<script>
-var audioContext = new AudioContext();
-var falling3rdsApp = {
-  currentNumberOfParts: 0,
-  colourEnumerator: 0,
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link rel="icon" type="image/png" href="public/favicon.png">
+    <title>FALLING THIRDS</title>
+  </head>
 
-  resetParts: function(){
-    this.currentNumberOfParts = 0;
-  },
-
-  cycleBackgroundColour: function(){
-    this.colourEnumerator += 1;
-    var backgroundColour = {
-      hsl: "hsl(" + ((this.colourEnumerator/5) % 360)
-        + ", " + (70 * Math.sin(this.colourEnumerator/500)) + "%, "
-        + (100 - (70 * Math.sin(this.colourEnumerator/400))) + "%)"
-    };
-    document.getElementById("fullPage").style.background = backgroundColour.hsl;
-    console.log("background colour: " + backgroundColour.hsl);
-  },
-  arpeggioNotes: [0,0,4,4,7],
-  octaveDistribution: [-24,-24,-12,-12,-12,0,0,0,0,0,12,12],
-  repeatPeriods: [3,4,5,5,5.5,6,7,7.5,7.5,8,9,10,11,12,13,14,15,16],
-  speakers: audioContext.destination,
-  availableWaves: ["sine"],
-  secondsPerChord: 20,
-  displayVolume: 3,
-
-  volumeUp: function(){
-    if(this.displayVolume < 11){
-      this.displayVolume += 1;
-    };
-    document.getElementById("volume").innerHTML = this.displayVolume;
-  },
-
-  volumeDown: function(){
-    if(this.displayVolume > 0){
-      this.displayVolume -= 1;
-    };
-    document.getElementById("volume").innerHTML = this.displayVolume;
-  },
-
-  volumeConversion: function(){
-    return (0.009 * this.displayVolume * this.displayVolume)-(0.012 * this.displayVolume);
-  },
-
-  newMusicalPart: function(){
-    falling3rdsApp.currentNumberOfParts += 1;
-    var id = falling3rdsApp.currentNumberOfParts;
-    var noteSet = [chooseNote(), chooseNote(), chooseNote()];
-    var noteLengths = [0.5, 0.33, 1, 0.66, 0.11, 2, 3, 5, 0.75];
-	  var noteLength = sample(noteLengths);
-	  var wave = sample(this.availableWaves);
-	  var melodyLength = sample(this.repeatPeriods);
-	  melody();
-    var looper = setInterval(melody,(1000 * melodyLength));
-
-    function endMusic(){
-      clearInterval(looper);
-    };
-
-    function chooseNote(){
-      return (sample(falling3rdsApp.arpeggioNotes)
-        + sample(falling3rdsApp.octaveDistribution));
-    };
-
-    function sample(arr){
-      return arr[~~(Math.random() * arr.length)];
-    };
-
-    function melody(){
-      play(0, noteSet[0], 0.5, wave);
-      play((+noteLength), noteSet[1], 0.5, wave);
-      play((2 * +noteLength), noteSet[2], 0.5, wave);
-    };
-
-    function timeInSeconds(time){
-      var secs = time.getSeconds();
-      var mins = time.getMinutes();
-      var hours = time.getHours();
-      var days = time.getUTCDate();
-      return secs + (mins * 60) + (hours * 60 * 60) + (days * 60 * 60 * 24);
-    };
-
-    function thirdsCycler(number){
-      var step = number % 24;
-      var majorOrMinor = "major";
-      var cycleAdjustment = 0;
-
-      if (step % 2 == 1) {
-        cycleAdjustment = 0.5;
-        majorOrMinor = "minor";
-      };
-
-      var transpose = (step * -3.5) + cycleAdjustment;
-
-      while (transpose < -3) {
-        transpose += 12;
-      };
-
-      return [transpose, majorOrMinor];
-    };
-
-    function play(delay, pitch, duration, wave) {
-      falling3rdsApp.cycleBackgroundColour();
-      if (falling3rdsApp.currentNumberOfParts == 0){
-        endMusic();
-      };
-
-      var progressiveTime = new Date();
-      var secondsIntoMonth = timeInSeconds(progressiveTime);
-      var chordNumber = parseInt(secondsIntoMonth / falling3rdsApp.secondsPerChord);
-      var transpose = thirdsCycler(chordNumber)[0];
-      var currentChordType = thirdsCycler(chordNumber)[1];
-
-      if ([-20,-8,4,16,28].includes(pitch) && currentChordType == "minor"){
-        pitch -= 1
-      };
-
-      var startTime = audioContext.currentTime + delay;
-      var endTime = startTime + duration;
-      var delayLength = Math.random();
-      var panningAmount = (2 * (Math.random())) - 1;
-      var envelope = audioContext.createGain();
-      var oscillator = audioContext.createOscillator();
-      var delayInput = audioContext.createGain();
-      var delayFeedback = audioContext.createGain();
-      var delayTimer = audioContext.createDelay();
-      var delayOutput = audioContext.createGain();
-      var panner = audioContext.createStereoPanner();
-      var volume = falling3rdsApp.volumeConversion(falling3rdsApp.displayVolume);
-
-      panner.connect(falling3rdsApp.speakers);
-      delayOutput.connect(panner);
-      delayInput.connect(delayOutput);
-      delayFeedback.connect(delayOutput);
-      delayFeedback.connect(delayTimer);
-      delayTimer.connect(delayFeedback);
-      delayInput.connect(delayTimer);
-      envelope.connect(delayTimer);
-      oscillator.connect(envelope);
-
-      envelope.gain.value = 0;
-      envelope.gain.setTargetAtTime(volume, startTime, 0.1);
-      envelope.gain.setTargetAtTime(0, endTime, 0.2);
-      oscillator.type = wave;
-      oscillator.detune.value = (pitch + transpose) * 100;
-      oscillator.start(startTime);
-      oscillator.stop(endTime + 2);
-
-      delayTimer.delayTime.value = delayLength;
-      delayFeedback.gain.value = 0.8;
-      panner.pan.value = panningAmount;
-      console.log("just played a note: pitch = " + (pitch+transpose)
-        + " and delay = " + delayLength + " and volume = " + volume);
-    };
-  }
-};
-
-window.onload = function(){
-  document.getElementById("webAudioTest").innerHTML = "";
-};
-
-</script>
-
-<head>
-</head>
-
-<body id="fullPage" style="text-align: center">
-  <br>
-  <br>
-  <h1>
-    FALLING THIRDS
-  </h1>
-  <br>
-  *
-  <br>
-  <br>
-  //HAVE PATIENCE//
-  <br>
-  <br>
-  <span id="webAudioTest">
-    Sadly you're using a browser that doesn't support Web Audio, so this site won't do anything for you.
-    Try using Firefox or Chrome, or something other than an iPhone. Sorry.
-    If you are using Firefox or Chrome and aren't on an iPhone and it's still not working, you might have JavaScript turned off, or have an extension that's clashing with this, or you might have too many Web Audio players going at the same time.
-  </span>
-  <br>
-  <br>
-  <a onclick="falling3rdsApp.newMusicalPart()" href="#">
-    start / intensify
-  </a>
-  <br>
-  <br>
-  <a onclick="falling3rdsApp.resetParts()" href="#">
-    clear music
-  </a>
-  <br>
-  <br>
-  <a onclick="falling3rdsApp.volumeUp()" href="#">
-    ↑
-  </a>
-  <br>
-  <br>
-  volume:
-  <span id="volume">
-    3
-  </span>
-  <br>
-  <br>
-  <a onclick="falling3rdsApp.volumeDown()" href="#">
-    ↓
-  </a>
-</body>
+  <body id="fullPage">
+    <section id="triangle-down">
+    </section>
+    <section id="triangle-contents">
+      <h1> FALLING THIRDS</h1>
+      <h4> by <a href="http://github.com/christopheralcock/cv" target="_blank">christopher alcock</a></h4>
+      <h3>*</h3>
+      <h2 id="patience">//HAVE PATIENCE//</h2>
+      <h3>*</h3>
+      <h3 id="webAudioTest">
+        Sadly you're using a browser that doesn't support HTML Audio, so this site won't do anything for you.
+        Try using Firefox or Chrome, or something other than an iPhone. Sorry.
+        <p>Click <a href="https://github.com/christopheralcock/falling3rds/blob/gh-pages/README.md" target="_blank">here</a> to find out more.</p>
+      </h3>
+      <section id="controls">
+        <section id="play-button">
+          <h1><span id="play-button-wording" href="#">start</span></h1>
+        </section>
+        <h2 id="stars">&nbsp;</h2>
+        <p id="stop" href="#">&nbsp;</p>
+        <section id="volumeControls">
+          <section id="volume-up-triangle"></section>
+          <p>volume: <span id="volumeLevel">3</span></p>
+          <section id="volume-down-triangle"></section>
+        </section>
+      </section>
+    </section>
+    <section id="information">
+      <h2><a href="https://github.com/christopheralcock/falling3rds/blob/gh-pages/README.md" target="_blank">more information</a></h2>
+    </section>
+  </body>
+</html>
+<script type="text/javascript" src="public/falling3rdsPage.js"></script>
+<script type="text/javascript" src="public/falling3rdsApp.js"></script>
+<script type="text/javascript" src="public/colourCyclerApp.js"></script>
+<script type="text/javascript" src="public/googleAnalytics.js"></script>
