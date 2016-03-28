@@ -1,8 +1,8 @@
 # Falling Thirds
 
-An Ambient music HTML5 Audio app by Christopher Alcock
+An Ambient music [HTML5 Audio](https://en.wikipedia.org/wiki/HTML5_Audio) app by Christopher Alcock.
 
-Falling Thirds is my most complete HTML5 Audio app as of March 2016.  It plays randomly-inverted, randomly-sped, randomly-looped, randomly-delayed, randomly-panned quasi-arpeggios in a falling thirds chord pattern, chosen as the unstrictly-synchronised loops will not clash with eachother, as the anteceding and preceding chords will always be harmonious, an approach taken from Steve Reich's Music for 18 Musicians.
+Falling Thirds is my most complete HTML5 Audio app as of March 2016.  It plays randomly-[inverted](https://en.wikipedia.org/wiki/Inversion_(music)#Chords), randomly-[sped](https://en.wikipedia.org/wiki/Tempo), randomly-[looped](https://en.wikipedia.org/wiki/Loop_(music)), randomly-[delayed](https://en.wikipedia.org/wiki/Delay_(audio_effect)), randomly-[panned](https://en.wikipedia.org/wiki/Panning_(audio)) quasi-[arpeggios](https://en.wikipedia.org/wiki/Arpeggio) in a falling thirds chord pattern, chosen as the [unstrictly-synchronised](https://en.wikipedia.org/wiki/Phase_music) loops will not [clash](https://en.wikipedia.org/wiki/Consonance_and_dissonance#Dissonance) with eachother, as the anteceding and preceding chords will always be [harmonious](https://en.wikipedia.org/wiki/Consonance_and_dissonance#Consonance), an approach taken from [Steve Reich](https://en.wikipedia.org/wiki/Steve_Reich)'s [Music for 18 Musicians](https://en.wikipedia.org/wiki/Music_for_18_Musicians).
 
 The chord is determined by your clock (how many second into the month you are, to be precise), so as long as your clocks are accurate to within about 20 seconds, you can open the site on multiple devices and experience the sound environment in surround, which was the original intention of the piece.
 
@@ -16,4 +16,12 @@ Other issues could be caused by a clash with existing extensions, or you having 
 
 # Chord Sequence
 
-C => Am => F => Dm => B♭ => Gm => E♭ => Cm => A♭ => Fm => D♭ => B♭m => G♭ => E♭m => B => A♭m => E => D♭m => A => G♭m => D => Bm => G => Em => C ...
+... C => Am => F => Dm => B♭ => Gm => E♭ => Cm => A♭ => Fm => D♭ => B♭m => G♭ => E♭m => B => A♭m => E => D♭m => A => G♭m => D => Bm => G => Em => C ...
+
+# Thanks
+
+Particular thanks go to [Joe Corcoran](https://corcoran.io/), [Dan Harvey](http://internetisverymuchmybusiness.com/) and Alex Norman for advice on code, and to [Matt McKegg](https://github.com/mmckegg) for his amazingly helpful [Web Audio School](http://mmckegg.github.io/web-audio-school/) that showed me how easy writing for HTML5 Audio components is.
+
+# Please give me a job
+
+I'm based in London and trying to make a career change into Web Development. My CV can be found [here](github.com/christopheralcock/cv). I'm not looking for anything specifically to do with music.
