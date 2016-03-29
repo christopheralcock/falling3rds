@@ -21,7 +21,7 @@ If you just want to hear it and don't care about the visuals, an earlier, simple
 
 # Thanks
 
-Particular thanks go to [Joe Corcoran](https://corcoran.io/), [Dan Harvey](http://internetisverymuchmybusiness.com/) and Alex Norman for advice on code, and to [Matt McKegg](https://github.com/mmckegg) for his amazingly helpful [Web Audio School](http://mmckegg.github.io/web-audio-school/) that showed me how easy writing for HTML5 Audio components is.
+Particular thanks go to [Joe Corcoran](https://corcoran.io/), [Dan Harvey](http://internetisverymuchmybusiness.com/) and [Alex Norman](http://twitter.com/axelnormand) for advice on code, and to [Matt McKegg](https://github.com/mmckegg) for his amazingly helpful [Web Audio School](http://mmckegg.github.io/web-audio-school/) that showed me how easy writing for HTML5 Audio components is.
 
 Any further advice or ideas for the app, its functions or appearance would be gratefully received - contact me on [twitter](http://twitter.com/chrisalcockdev) or through github pull requests.
 

@@ -29,6 +29,7 @@ var falling3rdsApp = {
   updatePlay: function(){
     if (this.currentNumberOfParts == 0){
       document.getElementById("play-button-wording").innerHTML = "play";
+      document.getElementById("patience").innerHTML = "HAVE PATIENCE";
       document.getElementById("play-button").style = "position: relative; margin: auto; width: 0; height: 0; border-top: 60px solid transparent; border-left: 100px solid hsl(331, 48%, 16%); border-bottom: 60px solid transparent;";
     } else if (this.currentNumberOfParts < 5) {
       document.getElementById("play-button-wording").innerHTML = "more";
@@ -130,6 +131,8 @@ var falling3rdsApp = {
       var chordNumber = parseInt(secondsIntoMonth / falling3rdsApp.secondsPerChord);
       var transpose = thirdsCycler(chordNumber)[0];
       var currentChordType = thirdsCycler(chordNumber)[1];
+      var translationArray = ["A", "B♭", "B", "C", "D♭", "D", "E♭", "E", "F", "G♭", "G", "A♭"]
+      document.getElementById("patience").innerHTML =  translationArray[(transpose + 12) % 12] + " " + currentChordType;
 
       if ([-20,-8,4,16,28].includes(pitch) && currentChordType == "minor"){
         pitch -= 1;
@@ -147,9 +150,11 @@ var falling3rdsApp = {
       var delayOutput = audioContext.createGain();
       var panner = audioContext.createStereoPanner();
       var volume = falling3rdsApp.volumeConversion(falling3rdsApp.displayVolume);
+      var filter = audioContext.createBiquadFilter();
 
       panner.connect(falling3rdsApp.speakers);
-      delayOutput.connect(panner);
+      filter.connect(panner);
+      delayOutput.connect(filter);
       delayInput.connect(delayOutput);
       delayFeedback.connect(delayOutput);
       delayFeedback.connect(delayTimer);
@@ -169,6 +174,8 @@ var falling3rdsApp = {
       delayTimer.delayTime.value = delayLength;
       delayFeedback.gain.value = 0.8;
       panner.pan.value = panningAmount;
+      filter.type = 'lowpass';
+      filter.frequency.value = 600;
       console.log("just played a note: pitch = " + (pitch+transpose)
         + " and delay = " + delayLength + " and volume = " + volume);
     };
