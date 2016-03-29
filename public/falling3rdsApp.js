@@ -130,6 +130,8 @@ var falling3rdsApp = {
       var chordNumber = parseInt(secondsIntoMonth / falling3rdsApp.secondsPerChord);
       var transpose = thirdsCycler(chordNumber)[0];
       var currentChordType = thirdsCycler(chordNumber)[1];
+      var translationArray = ["A", "B♭", "B", "C", "D♭", "D", "E♭", "E", "F", "G♭", "G", "A♭"]
+      document.getElementById("patience").innerHTML =  translationArray[(transpose + 12) % 12] + " " + currentChordType;
 
       if ([-20,-8,4,16,28].includes(pitch) && currentChordType == "minor"){
         pitch -= 1;
