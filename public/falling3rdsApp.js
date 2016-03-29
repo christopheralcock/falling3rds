@@ -29,6 +29,7 @@ var falling3rdsApp = {
   updatePlay: function(){
     if (this.currentNumberOfParts == 0){
       document.getElementById("play-button-wording").innerHTML = "play";
+      document.getElementById("patience").innerHTML = "HAVE PATIENCE";
       document.getElementById("play-button").style = "position: relative; margin: auto; width: 0; height: 0; border-top: 60px solid transparent; border-left: 100px solid hsl(331, 48%, 16%); border-bottom: 60px solid transparent;";
     } else if (this.currentNumberOfParts < 5) {
       document.getElementById("play-button-wording").innerHTML = "more";
