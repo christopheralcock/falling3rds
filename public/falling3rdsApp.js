@@ -150,9 +150,11 @@ var falling3rdsApp = {
       var delayOutput = audioContext.createGain();
       var panner = audioContext.createStereoPanner();
       var volume = falling3rdsApp.volumeConversion(falling3rdsApp.displayVolume);
+      var filter = audioContext.createBiquadFilter();
 
       panner.connect(falling3rdsApp.speakers);
-      delayOutput.connect(panner);
+      filter.connect(panner);
+      delayOutput.connect(filter);
       delayInput.connect(delayOutput);
       delayFeedback.connect(delayOutput);
       delayFeedback.connect(delayTimer);
@@ -172,6 +174,8 @@ var falling3rdsApp = {
       delayTimer.delayTime.value = delayLength;
       delayFeedback.gain.value = 0.8;
       panner.pan.value = panningAmount;
+      filter.type = 'lowpass';
+      filter.frequency.value = 600;
       console.log("just played a note: pitch = " + (pitch+transpose)
         + " and delay = " + delayLength + " and volume = " + volume);
     };
