@@ -45,7 +45,7 @@ var falling3rdsApp = {
   octaveDistribution: [-24,-24,-12,-12,-12,0,0,0,0,0,12,12],
   repeatPeriods: [3,4,5,5,5.5,6,7,7.5,7.5,8,9,10,11,12,13,14,15,16],
   speakers: audioContext.destination,
-  availableWaves: ["sine"],
+  availableWaves: ["sine", "square", "triangle"],
   secondsPerChord: 20,
   displayVolume: 3,
 
@@ -73,10 +73,12 @@ var falling3rdsApp = {
     var id = falling3rdsApp.currentNumberOfParts;
     var noteSet = [chooseNote(), chooseNote(), chooseNote()];
     var noteLengths = [0.5, 0.33, 1, 0.66, 0.11, 2, 3, 5, 0.75];
-	  var noteLength = sample(noteLengths);
-	  var wave = sample(this.availableWaves);
-	  var melodyLength = sample(this.repeatPeriods);
-	  melody();
+	var noteLength = sample(noteLengths);
+	var wave = sample(this.availableWaves);
+	var melodyLength = sample(this.repeatPeriods);
+    
+
+	melody();
     this.looper = setInterval(melody,(1000 * melodyLength));
     this.musicLoops.push(this.looper);
 
@@ -125,7 +127,6 @@ var falling3rdsApp = {
     };
 
     function play(delay, pitch, duration, wave) {
-
       var progressiveTime = new Date();
       var secondsIntoMonth = timeInSeconds(progressiveTime);
       var chordNumber = parseInt(secondsIntoMonth / falling3rdsApp.secondsPerChord);
@@ -176,8 +177,18 @@ var falling3rdsApp = {
       panner.pan.value = panningAmount;
       filter.type = 'lowpass';
       filter.frequency.value = 600;
-      console.log("just played a note: pitch = " + (pitch+transpose)
-        + " and delay = " + delayLength + " and volume = " + volume);
-    };
+      //console.log("just played a note: pitch = " + (pitch+transpose)
+      //  + " and delay = " + delayLength + " and volume = " + volume + " debug " + oscillator);
+	  setTimeout(doSomething, 10000);
+
+	  function doSomething() {
+		panner.disconnect();
+		filter.disconnect();
+		delayOutput.disconnect();
+		delayTimer.disconnect();
+		delayFeedback.disconnect();
+		envelope.disconnect();
+	  }
+	};
   }
 };
