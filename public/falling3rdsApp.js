@@ -179,9 +179,9 @@ var falling3rdsApp = {
       filter.frequency.value = 600;
       //console.log("just played a note: pitch = " + (pitch+transpose)
       //  + " and delay = " + delayLength + " and volume = " + volume + " debug " + oscillator);
-	  setTimeout(doSomething, 10000);
+	  setTimeout(disconnectNodes, 10000);
 
-	  function doSomething() {
+	  function disconnectNodes() {
 		panner.disconnect();
 		filter.disconnect();
 		delayOutput.disconnect();
