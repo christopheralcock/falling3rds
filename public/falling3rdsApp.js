@@ -42,7 +42,7 @@ var falling3rdsApp = {
 
   musicLoops: [],
   arpeggioNotes: [0,0,4,4,7],
-  octaveDistribution: [-24,-24,-12,-12,-12,0,0,0,0,0,12,12],
+  octaveDistribution: [-24,-24,-12,-12,-12,0,0,0,0,0,12,12,12],
   repeatPeriods: [3,4,5,5,5.5,6,7,7.5,7.5,8,9,10,11,12,13,14,15,16],
   speakers: audioContext.destination,
   availableWaves: ["sine", "square", "triangle"],
