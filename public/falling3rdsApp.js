@@ -152,8 +152,10 @@ var falling3rdsApp = {
       var panner = audioContext.createStereoPanner();
       var volume = falling3rdsApp.volumeConversion(falling3rdsApp.displayVolume);
       var filter = audioContext.createBiquadFilter();
+	  var analyser = audioContext.createAnalyser();
 
-      panner.connect(falling3rdsApp.speakers);
+      analyser.connect(falling3rdsApp.speakers);
+	  panner.connect(analyser);
       filter.connect(panner);
       delayOutput.connect(filter);
       delayInput.connect(delayOutput);
