@@ -1,4 +1,5 @@
-var audioContext = new (window.AudioContext || window.webkitAudioContext)();
+var multiPlatformAudioContext = window.AudioContext || window.webkitAudioContext;
+var audioContext = new multiPlatformAudioContext();
 
 window.onload = function(){
   document.getElementById("webAudioTest").innerHTML = "";
