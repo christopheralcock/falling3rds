@@ -1,4 +1,4 @@
-var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+var audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
 window.onload = function(){
   document.getElementById("webAudioTest").innerHTML = "";
