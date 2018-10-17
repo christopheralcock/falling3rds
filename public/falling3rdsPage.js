@@ -1,5 +1,5 @@
-var audioContext = window.AudioContext || window.webkitAudioContext;
-
+//var audioContext = window.AudioContext || window.webkitAudioContext;
+var audioContext = Tone.context;
 window.onload = function(){
   document.getElementById("webAudioTest").innerHTML = "";
 };
